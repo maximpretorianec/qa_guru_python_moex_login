@@ -8,7 +8,6 @@ class Registration:
 
     def register_user(self, user: User):
         with allure.step("Заполнение формы"):
-            browser.execute_script("document.body.style.zoom='67%'")
             browser.element("#firstName").type(user.first_name)
             browser.element("#lastName").type(user.last_name)
             browser.element("#userEmail").type(user.email)
