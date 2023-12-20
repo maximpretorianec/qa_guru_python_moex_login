@@ -8,6 +8,7 @@ class Registration:
 
     def register_user(self, user: User):
         with allure.step("Заполнение формы"):
+            browser.execute_script("document.body.style.zoom='67%'")
             browser.element("#firstName").type(user.first_name)
             browser.element("#lastName").type(user.last_name)
             browser.element("#userEmail").type(user.email)
@@ -22,7 +23,6 @@ class Registration:
             browser.element(
                 f'.react-datepicker__day--0{user.date_of_birth.day}:not(.react-datepicker__day--outside-month)').click()
             browser.element("#uploadPicture").send_keys(path(user.picture))
-            browser.execute_script("document.body.style.zoom='67%'")
             browser.element('#state').click()
             browser.all('[id^=react-select][id*=option]').element_by(have.exact_text(user.state)).click()
             browser.element('#city').click()
