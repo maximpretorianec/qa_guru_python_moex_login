@@ -1,2 +1,2 @@
 # qaguru
-Learn 10
+Learn 12
