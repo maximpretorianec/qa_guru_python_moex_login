@@ -1,3 +1,5 @@
+import time
+
 from selene import have, be, browser
 from utils.load_file import path
 from modules.user import User
@@ -18,6 +20,7 @@ class Registration:
             browser.element('#dateOfBirthInput').should(be.not_.blank).click()
             browser.element('.react-datepicker__month-select').type(user.date_of_birth.strftime('%B'))
             browser.element('.react-datepicker__year-select').type(user.date_of_birth.year)
+            time.sleep(2)
             browser.driver.execute_script("window.scrollBy(0,document.body.scrollHeight)")
             browser.execute_script("document.body.style.zoom='80%'")
             browser.element(
