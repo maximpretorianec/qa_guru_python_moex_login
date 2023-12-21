@@ -3,7 +3,7 @@ import datetime
 import allure
 from selene import browser
 from selenium import webdriver
-from users.user import User
+from modules.user import User
 from selenium.webdriver.chrome.options import Options
 
 from utils import attach
@@ -12,7 +12,6 @@ from utils import attach
 def browser_launch():
     with allure.step("Установка конфигурации драйвера"):
         options = Options()
-        options.add_argument('--headless')
         selenoid_capabilities = {
             "browserName": "chrome",
             'selenoid:options': {
@@ -27,8 +26,8 @@ def browser_launch():
         )
 
         browser.config.driver = driver
-    # with allure.step("Установка настроек браузера"):
-    #     browser.driver.set_window_size(1920, 1080)
+    with allure.step("Установка настроек браузера"):
+        browser.driver.set_window_size(1920, 1080)
     with allure.step("Открытие тестовой страницы"):
         browser.open('https://demoqa.com/automation-practice-form')
     yield
@@ -37,7 +36,7 @@ def browser_launch():
         attach.add_screenshot(browser)
         attach.add_video(browser)
         attach.add_logs(browser)
-    browser.close()
+    browser.quit()
 
 
 @pytest.fixture()

@@ -1,4 +1,4 @@
-from pages.Registration import Registration
+from pages.registration_page import Registration
 
 
 def test_form(create_user):

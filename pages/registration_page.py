@@ -1,7 +1,6 @@
-from selene.support.conditions import have, be
-from selene.support.shared import browser
+from selene import have, be, browser
 from utils.load_file import path
-from users.user import User
+from modules.user import User
 import allure
 
 class Registration:
@@ -19,6 +18,7 @@ class Registration:
             browser.element('#dateOfBirthInput').should(be.not_.blank).click()
             browser.element('.react-datepicker__month-select').type(user.date_of_birth.strftime('%B'))
             browser.element('.react-datepicker__year-select').type(user.date_of_birth.year)
+            browser.driver.execute_script("window.scrollBy(0,document.body.scrollHeight)")
             browser.element(
                 f'.react-datepicker__day--0{user.date_of_birth.day}:not(.react-datepicker__day--outside-month)').click()
             browser.element("#uploadPicture").send_keys(path(user.picture))
