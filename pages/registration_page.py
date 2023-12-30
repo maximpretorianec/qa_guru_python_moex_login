@@ -25,6 +25,7 @@ class Registration:
             browser.element('.react-datepicker__year-select').type(user_data.date_of_birth.year)
             browser.element(
                 f'.react-datepicker__day--0{user_data.date_of_birth.day}:not(.react-datepicker__day--outside-month)').click()
+            browser.driver.execute_script("document.querySelector('.body-height').style.transform='scale(.65)'")
             browser.element("#uploadPicture").send_keys(path(user_data.picture))
             browser.element('#state').click()
             browser.all('[id^=react-select][id*=option]').element_by(have.exact_text(user_data.state)).click()
