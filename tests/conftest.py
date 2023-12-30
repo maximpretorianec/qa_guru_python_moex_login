@@ -1,9 +1,7 @@
 import pytest
-import datetime
 import allure
 from selene import browser
 from selenium import webdriver
-from modules.user import User
 from selenium.webdriver.chrome.options import Options
 
 from utils import attach
@@ -14,6 +12,7 @@ def browser_launch():
         options = Options()
         selenoid_capabilities = {
             "browserName": "chrome",
+            "browserVersion": "100.0",
             'selenoid:options': {
                 'enableVNC': True,
                 'enableVideo': True
@@ -28,8 +27,7 @@ def browser_launch():
         browser.config.driver = driver
     with allure.step("Установка настроек браузера"):
         browser.driver.set_window_size(1920, 1080)
-    with allure.step("Открытие тестовой страницы"):
-        browser.open('https://demoqa.com/automation-practice-form')
+        browser.config.base_url = 'https://demoqa.com'
     yield
     with allure.step("Прикрепление данных к аллюр отчёту"):
         attach.add_html(browser)
@@ -37,21 +35,3 @@ def browser_launch():
         attach.add_video(browser)
         attach.add_logs(browser)
     browser.quit()
-
-
-@pytest.fixture()
-def create_user():
-    return User(
-        first_name='RandomName',
-        last_name='RandomFamilyName',
-        email='user@qa.com',
-        gender='Male',
-        mobile='9991111111',
-        date_of_birth=datetime.date(1993, 9, 24),
-        subject='Arts',
-        hobby='Music',
-        picture='Duck.jpg',
-        address='Street',
-        state='Uttar Pradesh',
-        city='Lucknow'
-    )

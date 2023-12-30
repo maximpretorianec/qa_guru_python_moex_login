@@ -1,52 +1,51 @@
-import time
-
 from selene import have, be, browser
 from utils.load_file import path
-from modules.user import User
+from models.user import User
 import allure
+
 
 class Registration:
 
-    def register_user(self, user: User):
-        with allure.step("Заполнение формы"):
-            browser.element("#firstName").type(user.first_name)
-            browser.element("#lastName").type(user.last_name)
-            browser.element("#userEmail").type(user.email)
-            browser.element("#userNumber").type(user.mobile)
-            browser.element("#currentAddress").type(user.address)
-            browser.element("#subjectsInput").type(user.subject).press_enter()
-            browser.all('input[name=gender]').element_by(have.value(user.gender)).element('..').click()
-            browser.all('.custom-checkbox').element_by(have.exact_text(user.hobby)).click()
-            browser.element('#dateOfBirthInput').should(be.not_.blank).click()
-            browser.element('.react-datepicker__month-select').type(user.date_of_birth.strftime('%B'))
-            browser.element('.react-datepicker__year-select').type(user.date_of_birth.year)
-            time.sleep(2)
-            browser.driver.execute_script("window.scrollBy(0,document.body.scrollHeight)")
-            browser.execute_script("document.body.style.zoom='80%'")
-            browser.element(
-                f'.react-datepicker__day--0{user.date_of_birth.day}:not(.react-datepicker__day--outside-month)').click()
-            browser.element("#uploadPicture").send_keys(path(user.picture))
-            browser.element('#state').click()
-            browser.all('[id^=react-select][id*=option]').element_by(have.exact_text(user.state)).click()
-            browser.element('#city').click()
-            browser.all('[id^=react-select][id*=option]').element_by(have.exact_text(user.city)).click()
+    def open(self):
+        with allure.step("Открытие формы"):
+            browser.open('/automation-practice-form')
 
+    def register_user(self, user_data: User):
+        with allure.step("Заполнение формы"):
+            browser.element("#firstName").type(user_data.first_name)
+            browser.element("#lastName").type(user_data.last_name)
+            browser.element("#userEmail").type(user_data.email)
+            browser.element("#userNumber").type(user_data.mobile)
+            browser.element("#currentAddress").type(user_data.address)
+            browser.element("#subjectsInput").type(user_data.subject).press_enter()
+            browser.all('input[name=gender]').element_by(have.value(user_data.gender)).element('..').click()
+            browser.all('.custom-checkbox').element_by(have.exact_text(user_data.hobby)).click()
+            browser.element('#dateOfBirthInput').should(be.not_.blank).click()
+            browser.element('.react-datepicker__month-select').type(user_data.date_of_birth.strftime('%B'))
+            browser.element('.react-datepicker__year-select').type(user_data.date_of_birth.year)
+            browser.element(
+                f'.react-datepicker__day--0{user_data.date_of_birth.day}:not(.react-datepicker__day--outside-month)').click()
+            browser.element("#uploadPicture").send_keys(path(user_data.picture))
+            browser.element('#state').click()
+            browser.all('[id^=react-select][id*=option]').element_by(have.exact_text(user_data.state)).click()
+            browser.element('#city').click()
+            browser.all('[id^=react-select][id*=option]').element_by(have.exact_text(user_data.city)).click()
         with allure.step("Отправка формы"):
             browser.element('#submit').press_enter()
 
-    def assert_registration_data(self, user: User):
+    def assert_registration_data(self, user_data: User):
         with allure.step("Проверка данных регистрации"):
             browser.element('.table').all('td').even.should(
                 have.exact_texts(
-                    f'{user.first_name} {user.last_name}',
-                    user.email,
-                    user.gender,
-                    user.mobile,
-                    user.date_of_birth.strftime('%d %B,%Y'),
-                    user.subject,
-                    user.hobby,
-                    user.picture,
-                    user.address,
-                    f'{user.state} {user.city}',
+                    f'{user_data.first_name} {user_data.last_name}',
+                    user_data.email,
+                    user_data.gender,
+                    user_data.mobile,
+                    user_data.date_of_birth.strftime('%d %B,%Y'),
+                    user_data.subject,
+                    user_data.hobby,
+                    user_data.picture,
+                    user_data.address,
+                    f'{user_data.state} {user_data.city}',
                 )
             )
