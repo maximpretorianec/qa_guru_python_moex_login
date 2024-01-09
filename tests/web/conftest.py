@@ -27,7 +27,7 @@ def browser_launch():
         browser.config.driver = driver
     with allure.step("Установка настроек браузера"):
         browser.driver.set_window_size(1920, 1080)
-        browser.config.base_url = 'https://demoqa.com'
+        browser.config.base_url = 'https://pikabu.ru'
     yield
     with allure.step("Прикрепление данных к аллюр отчёту"):
         attach.add_html(browser)
