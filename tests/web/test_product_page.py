@@ -1,7 +1,6 @@
 import allure
 
 from utils import TypeTag, Severity
-from test_data import auth_email, auth_password
 from pages.web import MainPage, LoginPage, ProductPage
 
 
@@ -17,20 +16,15 @@ class TestProdPage:
     def test_fill_cart(self):
         main_page = MainPage()
         main_page.click_cabinet_button_at_top_menu()
+
         login_page = LoginPage()
-        login_page.type_login_form(auth_email)
-        login_page.type_password_form(auth_password)
-        login_page.btn_login_click()
-        main_page.click_empty_cart_button_at_top_menu()
-        main_page.click_add_service_to_cart_button()
+        login_page.login()
+        main_page.open_product_catalog()
 
         prod_page = ProductPage()
-        prod_page.click_subscribe_button()
-        prod_page.select_residence_choice_button()
-        prod_page.click_approve_residence_choice_button()
-        prod_page.select_product_by_button()
-        prod_page.click_fill_cart_button()
+        prod_page.fill_product_to_cart()
         main_page.click_filling_cart_button_at_top_menu()
+
         main_page.check_visibility_filling_cart()
 
     @allure.story('Очистка корзины')
@@ -43,19 +37,13 @@ class TestProdPage:
     def test_remove_product_from_cart(self):
         main_page = MainPage()
         main_page.click_cabinet_button_at_top_menu()
+
         login_page = LoginPage()
-        login_page.type_login_form(auth_email)
-        login_page.type_password_form(auth_password)
-        login_page.btn_login_click()
-        main_page.click_empty_cart_button_at_top_menu()
-        main_page.click_add_service_to_cart_button()
+        login_page.login()
+        main_page.open_product_catalog()
 
         prod_page = ProductPage()
-        prod_page.click_subscribe_button()
-        prod_page.select_residence_choice_button()
-        prod_page.click_approve_residence_choice_button()
-        prod_page.select_product_by_button()
-        prod_page.click_fill_cart_button()
-        main_page.click_filling_cart_button_at_top_menu()
-        main_page.click_remove_product_from_cart()
+        prod_page.fill_product_to_cart()
+        main_page.remove_product_from_cart()
+
         main_page.is_assert_equal_memory(main_page.check_remove_product_from_cart(), False)

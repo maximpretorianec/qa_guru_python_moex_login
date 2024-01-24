@@ -1,7 +1,6 @@
 import allure
 
 from utils import TypeTag, Severity
-from test_data import auth_email, auth_password
 from pages.web import MainPage, LoginPage
 
 
@@ -17,8 +16,8 @@ class TestLoginPage:
     def test_moex_login(self):
         main_page = MainPage()
         main_page.click_cabinet_button_at_top_menu()
+
         login_page = LoginPage()
-        login_page.type_login_form(auth_email)
-        login_page.type_password_form(auth_password)
-        login_page.btn_login_click()
-        main_page.check_visibility_login_at_top_menu(auth_email)
+        login_page.login()
+
+        main_page.check_visibility_login_at_top_menu()

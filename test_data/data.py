@@ -1,5 +1,6 @@
 import os
 from dotenv import load_dotenv
+from .users import User
 
 load_dotenv()
 
@@ -64,3 +65,8 @@ class EngineEndpoints(CoreEndpoints):
 class SecuritiesEndpoints(CoreEndpoints):
     def __init__(self):
         self.SECURITIES_LIST = super().ISS + '/securities.'  # endpoint securities list
+
+
+user_ui = User(
+    email=auth_email,
+    password=auth_password)

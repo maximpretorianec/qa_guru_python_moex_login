@@ -1,8 +1,15 @@
-from .base_page import BasePage, step
+from utils import BaseActions, step
 from test_data import LocationsProductPage
 
 
-class ProductPage(BasePage):
+class ProductPage(BaseActions):
+    def fill_product_to_cart(self):
+        self.click_subscribe_button()
+        self.select_residence_choice_button()
+        self.click_approve_residence_choice_button()
+        self.select_product_by_button()
+        self.click_fill_cart_button()
+
     def click_subscribe_button(self):
         with step('Нажатие на подписку хода торгов'):
             self.click_button(LocationsProductPage.cource_trading_subs)

@@ -1,10 +1,16 @@
 import pytest
 import allure
+import os
+
 from selene import browser
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-
 from utils import attach
+from test_data import load_dotenv
+
+
+load_dotenv()
+
 
 @pytest.fixture(autouse=True)
 def browser_launch():
@@ -19,8 +25,11 @@ def browser_launch():
             }
         }
         options.capabilities.update(selenoid_capabilities)
+        login = os.getenv('LOGIN')
+        password = os.getenv('PASSWORD')
+        url = os.getenv('URL')
         driver = webdriver.Remote(
-            command_executor=f"https://user1:1234@selenoid.autotests.cloud/wd/hub",
+            command_executor=f"https://{login}:{password}@{url}",
             options=options
         )
 

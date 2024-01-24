@@ -2,7 +2,7 @@ from selene import browser, be
 from allure import step
 
 
-class BasePage:
+class BaseActions:
     def open_site(self, url):
         browser.open(url)
 
@@ -19,7 +19,7 @@ class BasePage:
         browser.switch_to_next_tab()
 
     def is_assert_equal_memory(self, first_el, second_el):
-        with step('Сравнение равенства элементов'):
+        with step('Сравнение равенства элементов, по значению в памяти'):
             assert first_el is second_el
 
     def is_assert_equal_values(self, first_el, second_el):

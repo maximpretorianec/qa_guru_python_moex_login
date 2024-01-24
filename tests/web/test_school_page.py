@@ -16,8 +16,8 @@ class TestSchoolPage:
     @allure.severity(Severity.MINOR)
     def test_open_school_tab(self):
         main_page = MainPage()
-        main_page.click_href(MoexUrl.SCHOOL_URL)
-        main_page.switch_tab()
+        main_page.open_new_tab_school()
+
         school_page = SchoolPage()
         school_page.check_visibility_moex_school_logo()
         school_page.is_assert_equal_values(MoexUrl.SCHOOL_URL, school_page.get_curr_url())
