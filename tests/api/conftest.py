@@ -2,8 +2,7 @@ import pytest
 import random
 import os
 
-from utils import tmp_path
-from test_data import MoexUrl, EngineEndpoints, FileTypes
+from test_data import MoexUrl, EngineEndpoints, FileTypes, tmp_path
 from api_models import get_data_by_moex_api
 
 

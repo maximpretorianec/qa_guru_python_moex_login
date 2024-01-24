@@ -3,13 +3,8 @@ import logging
 import os
 import allure
 import requests
-from dotenv import load_dotenv
+from test_data import resources_path
 
-
-load_dotenv()
-
-resources_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../schemas'))
-tmp_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../tmp'))
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - Response Code: %(response_code)s - URL: %(url)s',
@@ -17,15 +12,12 @@ logging.basicConfig(level=logging.INFO,
 
 
 def load_schema(file):
-    schema_path = os.path.join(resources_path, file)
-    with open(schema_path) as file:
-        schema = json.load(file)
-        return schema
+    with open(os.path.join(resources_path, file)) as file:
+        return json.load(file)
 
 
 def send_request(base_url, endpoint, method, **kwargs):
-    method = method.lower()
-    method_func = getattr(requests, method)
+    method_func = getattr(requests, method.lower())
     response = method_func(base_url + endpoint, **kwargs)
     return response
 

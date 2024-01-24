@@ -6,6 +6,8 @@ load_dotenv()
 
 auth_email = os.getenv('AUTHORIZATION_LOGIN')
 auth_password = os.getenv('AUTHORIZATION_PASSWORD')
+resources_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../schemas'))
+tmp_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../tmp'))
 
 
 class ExpectedMessagesMOEX:

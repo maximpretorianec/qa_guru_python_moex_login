@@ -5,9 +5,9 @@ import json
 import os
 
 from api_models import get_data_by_moex_api
-from utils import load_schema, log_to_allure, log_to_console, tmp_path, TypeTag, Severity
+from utils import load_schema, log_to_allure, log_to_console, TypeTag, Severity
 from test_data import ExpectedMessagesMOEX, FileTypes, MoexDataVariables, StatusCode, EngineEndpoints, \
-    SecuritiesEndpoints
+    SecuritiesEndpoints, tmp_path
 
 
 @allure.tag(TypeTag.API)
