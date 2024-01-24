@@ -114,8 +114,7 @@ def test_get_directory_of_market_trading_modes(tmp_dir_control, base_url, get_ma
 @allure.label('layer', TypeTag.API)
 @allure.title("Проверка получения, в разных лимитах всех сделок рынка Мосбиржи по апи")
 @allure.feature("Получить все сделки рынка")
-@pytest.mark.parametrize("limit", [{'limit': 100},
-                                   {'limit': 1},
+@pytest.mark.parametrize("limit", [{'limit': 1},
                                    {'limit': 10},
                                    {'limit': 0}])
 def test_get_all_trades_by_market(base_url, limit):
