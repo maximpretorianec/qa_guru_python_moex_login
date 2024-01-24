@@ -4,3 +4,5 @@ allure-pytest>=2.13.2
 python-dotenv==1.0.0
 pydantic==2.5.2
 requests==2.31.0
+jsonschema
+lxml
