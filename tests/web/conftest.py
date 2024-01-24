@@ -9,7 +9,9 @@ from utils import attach
 from test_data import load_dotenv
 
 
-load_dotenv()
+@pytest.fixture(scope='function', autouse=True)
+def load_env():
+    load_dotenv()
 
 
 @pytest.fixture(autouse=True)
@@ -27,8 +29,10 @@ def browser_launch():
         options.capabilities.update(selenoid_capabilities)
         login = os.getenv('LOGIN')
         password = os.getenv('PASSWORD')
+        site = os.getenv('SITE')
+
         driver = webdriver.Remote(
-            command_executor=f"https://{login}:{password}@selenoid.autotests.cloud/wd/hub",
+            command_executor=f"https://{login}:{password}@{site}",
             options=options
         )
 
