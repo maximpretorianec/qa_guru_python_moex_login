@@ -1,7 +1,7 @@
 import allure
 
 from utils import TypeTag, Severity
-from pages.web import MainPage, LoginPage, ProductPage
+from pages.web import main, auth, prod
 
 
 @allure.epic('Страница продуктов Мосбиржи')
@@ -14,18 +14,16 @@ class TestProdPage:
     @allure.tag(TypeTag.REGRESS, TypeTag.UI, Severity.MAJOR)
     @allure.severity(Severity.MAJOR)
     def test_fill_cart(self):
-        main_page = MainPage()
-        main_page.click_cabinet_button_at_top_menu()
+        main.open_core_site()
+        main.click_cabinet_button_at_top_menu()
 
-        login_page = LoginPage()
-        login_page.login()
-        main_page.open_product_catalog()
+        auth.login()
+        main.open_product_catalog()
 
-        prod_page = ProductPage()
-        prod_page.fill_product_to_cart()
-        main_page.click_filling_cart_button_at_top_menu()
+        prod.fill_product_to_cart()
+        main.click_filling_cart_button_at_top_menu()
 
-        main_page.check_visibility_filling_cart()
+        main.check_visibility_filling_cart()
 
     @allure.story('Очистка корзины')
     @allure.title('После удаления продуктов, корзина должна быть пустой')
@@ -35,15 +33,13 @@ class TestProdPage:
     @allure.tag(TypeTag.REGRESS, TypeTag.UI, Severity.MAJOR)
     @allure.severity(Severity.MAJOR)
     def test_remove_product_from_cart(self):
-        main_page = MainPage()
-        main_page.click_cabinet_button_at_top_menu()
+        main.open_core_site()
+        main.click_cabinet_button_at_top_menu()
 
-        login_page = LoginPage()
-        login_page.login()
-        main_page.open_product_catalog()
+        auth.login()
+        main.open_product_catalog()
 
-        prod_page = ProductPage()
-        prod_page.fill_product_to_cart()
-        main_page.remove_product_from_cart()
+        prod.fill_product_to_cart()
+        main.remove_product_from_cart()
 
-        main_page.is_assert_equal_memory(main_page.check_remove_product_from_cart(), False)
+        main.is_assert_equal_memory(main.check_remove_product_from_cart(), False)

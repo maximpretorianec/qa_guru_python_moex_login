@@ -25,6 +25,7 @@ class LocationsMainPage:
     add_product_button = 'div.shopping-cart-footer .base-button--primary'
     filling_cart_button = '.cabinet__auth button[aria-label="Открыть корзину"]'
     filling_cart_section = 'div.shopping-cart-wrapper tbody'
+    alert_mess = '.alert-error'
 
     def __init__(self, text):
         self.login_field_by_user_text = f'//div[@class="cabinet-button"]/span[contains(., "{text}")]'

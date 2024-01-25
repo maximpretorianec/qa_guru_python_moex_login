@@ -29,3 +29,6 @@ class ProductPage(BaseActions):
     def click_fill_cart_button(self):
         with step('Добавление в корзину'):
             self.click_button(LocationsProductPage.filling_cart_button)
+
+
+prod = ProductPage()

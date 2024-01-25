@@ -2,7 +2,7 @@ import allure
 
 from utils import TypeTag, Severity
 from test_data import MoexUrl
-from pages.web import MainPage, SchoolPage
+from pages.web import main, school
 
 
 @allure.epic('Страница обучения')
@@ -15,9 +15,8 @@ class TestSchoolPage:
     @allure.tag(TypeTag.REGRESS, TypeTag.UI, Severity.MINOR)
     @allure.severity(Severity.MINOR)
     def test_open_school_tab(self):
-        main_page = MainPage()
-        main_page.open_new_tab_school()
+        main.open_core_site()
+        main.open_new_tab_school()
 
-        school_page = SchoolPage()
-        school_page.check_visibility_moex_school_logo()
-        school_page.is_assert_equal_values(MoexUrl.SCHOOL_URL, school_page.get_curr_url())
+        school.check_visibility_moex_school_logo()
+        school.is_assert_equal_values(MoexUrl.SCHOOL_URL, school.get_curr_url())

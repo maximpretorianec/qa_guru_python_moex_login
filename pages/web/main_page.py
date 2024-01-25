@@ -3,9 +3,9 @@ from test_data import LocationsMainPage, user_ui, MoexUrl
 
 
 class MainPage(BaseActions):
-    def __init__(self):
+    def open_core_site(self):
         with step('Открыть главную страницу'):
-            self.open_site('/')
+            self.open_site('')
 
     def check_visibility_moex_icon(self):
         with step('Проверка отображения лого MOEX в верхнем меню'):
@@ -34,6 +34,10 @@ class MainPage(BaseActions):
     def check_visibility_login_at_top_menu(self):
         with step('Имя пользователя отображается в верхнем меню'):
             self.check_visibility(LocationsMainPage(user_ui.email).login_field_by_user_text)
+
+    def check_visibility_login_alert(self):
+        with step('Имя пользователя отображается в верхнем меню'):
+            self.check_visibility(LocationsMainPage.alert_mess)
 
     def click_user_at_top_menu(self, login):
         with step('Нажатие кнопки личного кабинета пользователя'):
@@ -102,3 +106,6 @@ class MainPage(BaseActions):
     def check_visibility_filling_cart(self):
         with step('Проверка отображения заполненной корзины'):
             self.check_visibility(LocationsMainPage.filling_cart_section)
+
+
+main = MainPage()

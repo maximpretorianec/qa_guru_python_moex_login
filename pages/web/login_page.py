@@ -15,8 +15,11 @@ class LoginPage(BaseActions):
         with step('Нажатие кнопки "войти"'):
             self.click_button(LocationsLoginPage.enter_button)
 
-    def login(self):
+    def login(self, login=user_ui.email, password=user_ui.password):
         with step('Авторизация на сайте'):
-            self.type_login_form(user_ui.email)
-            self.type_password_form(user_ui.password)
+            self.type_login_form(login)
+            self.type_password_form(password)
             self.btn_login_click()
+
+
+auth = LoginPage()

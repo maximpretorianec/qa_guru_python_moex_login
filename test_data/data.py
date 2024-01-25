@@ -4,8 +4,6 @@ from .users import User
 
 load_dotenv()
 
-auth_email = os.getenv('AUTHORIZATION_LOGIN')
-auth_password = os.getenv('AUTHORIZATION_PASSWORD')
 resources_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../schemas'))
 tmp_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../tmp'))
 
@@ -50,6 +48,10 @@ class MoexUrl:
 class MoexVariables:
     rus_text = 'Продукты и услуги'
     eng_text = 'Markets'
+    auth_email = os.getenv('AUTHORIZATION_LOGIN')
+    auth_password = os.getenv('AUTHORIZATION_PASSWORD')
+    wrong_email = 'sdfsdf'
+    wrong_password = 'sdfdsfsd'
 
 
 class CoreEndpoints:
@@ -70,5 +72,9 @@ class SecuritiesEndpoints(CoreEndpoints):
 
 
 user_ui = User(
-    email=auth_email,
-    password=auth_password)
+    email=MoexVariables.auth_email,
+    password=MoexVariables.auth_password)
+
+wrong_user_ui = User(
+    email=MoexVariables.wrong_email,
+    password=MoexVariables.wrong_password)
